@@ -1,12 +1,13 @@
 import React from 'react'
 import Hero from '@/components/Hero'
+import InfoBoxes from '@/components/InfoBoxes'
 
 const HomePage = () => {
   return (
-    <div>
+    <>
       <Hero />
-      <Link href="/properties">Show Properties</Link>
-    </div>
+      <InfoBoxes />
+    </>
   )
 }
 
