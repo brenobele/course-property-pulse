@@ -1,20 +1,36 @@
-'use client'
+import PropertyDetails from '@/components/PropertyDetails'
+import PropertyHeaderImage from '@/components/PropertyHeaderImage'
+import connectDB from '@/config/database'
+import Property from '@/models/Property'
+import Link from 'next/link'
+import { FaArrowLeft } from 'react-icons/fa'
 
-import React from 'react'
-import { useRouter, useParams, useSearchParams } from 'next/navigation'
-
-const Property = () => {
-  const router = useRouter()
-  const seachParams = useSearchParams()
-  const { id } = useParams()
-  const name = seachParams.get('name')
+const PropertyPage = async ({ params }) => {
+  await connectDB()
+  const property = await Property.findById(params.id).lean()
 
   return (
-    <div>
-      <h1 className="text-3xl bg-lime-50 rounded m-1 py-1 px-2">{id} | {name}</h1>
-      <button onClick={() => router.push('/')} className="bg-blue-500 p2 rounded m-1 py-1 px-2">Go home</button>
-      </div>
+    <>
+      <PropertyHeaderImage image={property.images[0]} />
+      <section>
+        <div className='container m-auto py-6 px-6'>
+          <Link
+            href='/properties'
+            className='text-blue-500 hover:text-blue-600 flex items-center'
+          >
+            <FaArrowLeft className='mr-2' /> Back to Properties
+          </Link>
+        </div>
+      </section>
+      <section className='bg-blue-50'>
+        <div className='container m-auto py-10 px-6'>
+          <div className='grid grid-cols-1 md:grid-cols-70/30 w-full gap-6'>
+            <PropertyDetails property={property} />
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
 
-export default Property
+export default PropertyPage
