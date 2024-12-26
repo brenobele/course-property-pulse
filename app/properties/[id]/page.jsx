@@ -5,6 +5,15 @@ import Property from '@/models/Property'
 import Link from 'next/link'
 import { FaArrowLeft } from 'react-icons/fa'
 
+export async function generateStaticParams() {
+  await connectDB()
+  const properties = await Property.find({}, '_id').lean() // Apenas busque os IDs das propriedades
+
+  return properties.map((property) => ({
+    id: property._id.toString(),
+  }))
+}
+
 const PropertyPage = async ({ params }) => {
   await connectDB()
   const property = await Property.findById(params.id).lean()
