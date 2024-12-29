@@ -1,4 +1,5 @@
-import addProperty from "@/app/actions/addProperty"
+'use client'
+import addProperty from '@/app/actions/addProperty'
 
 const PropertyAddForm = () => {
   return (
@@ -38,7 +39,10 @@ const PropertyAddForm = () => {
         />
       </div>
       <div className='mb-4'>
-        <label htmlFor='description' className='block text-gray-700 font-bold mb-2'>
+        <label
+          htmlFor='description'
+          className='block text-gray-700 font-bold mb-2'
+        >
           Description
         </label>
         <textarea
@@ -239,7 +243,9 @@ const PropertyAddForm = () => {
               value='Gym/Fitness Center'
               className='mr-2'
             />
-            <label htmlFor='amenity_gym_fitness_center'>Gym/Fitness Center</label>
+            <label htmlFor='amenity_gym_fitness_center'>
+              Gym/Fitness Center
+            </label>
           </div>
           <div>
             <input
@@ -326,7 +332,10 @@ const PropertyAddForm = () => {
       </div>
 
       <div className='mb-4'>
-        <label htmlFor='seller_name' className='block text-gray-700 font-bold mb-2'>
+        <label
+          htmlFor='seller_name'
+          className='block text-gray-700 font-bold mb-2'
+        >
           Seller Name
         </label>
         <input
