@@ -1,43 +1,79 @@
 import { Schema, model, models } from 'mongoose'
 
-const propertySchema = new Schema(
+const PropertySchema = new Schema(
   {
-    owner: { type: Schema.Types.ObjectId, ref: 'User' },
-    name: { type: String, require: true },
-    type: { type: String, require: true },
-    description: { type: String },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
     location: {
-      street: { type: String },
-      city: { type: String },
-      state: { type: String },
-      zipcode: { type: String },
+      street: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      state: {
+        type: String,
+      },
+      zipcode: {
+        type: String,
+      },
     },
     beds: {
       type: Number,
-      require: true,
+      required: true,
     },
     baths: {
       type: Number,
-      require: true,
+      required: true,
     },
     square_feet: {
       type: Number,
-      require: true,
+      required: true,
     },
-    amenities: [{ type: Array }],
+    amenities: [
+      {
+        type: String,
+      },
+    ],
     rates: {
-      nightly: Number,
-      weekly: Number,
-      monthly: Number,
+      nightly: {
+        type: Number,
+      },
+      weekly: {
+        type: Number,
+      },
+      monthly: {
+        type: Number,
+      },
     },
     seller_info: {
-      name: String,
-      email: String,
-      phone: String,
+      name: {
+        type: String,
+      },
+      email: {
+        type: String,
+      },
+      phone: {
+        type: String,
+      },
     },
     images: [
       {
-        Type: String,
+        type: String,
       },
     ],
     is_featured: {
@@ -50,6 +86,6 @@ const propertySchema = new Schema(
   }
 )
 
-const Property = models.Property || model('Property', propertySchema)
+const Property = models.Property || model('Property', PropertySchema)
 
 export default Property
