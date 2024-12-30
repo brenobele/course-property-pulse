@@ -1,23 +1,24 @@
-import Image from 'next/image'
-import connectDB from '@/config/database'
-import Property from '@/models/Property'
-import { getSessionUser } from '@/utils/getSessionUser'
-import profileDefault from '@/assets/images/profile.png'
-import ProfileProperties from '@/components/ProfileProperties'
-import { convertToSerializableObject } from '@/utils/convertToObject'
+import Image from 'next/image';
+import connectDB from '@/config/database';
+import Property from '@/models/Property';
+import { getSessionUser } from '@/utils/getSessionUser';
+import profileDefault from '@/assets/images/profile.png';
+import ProfileProperties from '@/components/ProfileProperties';
+import { convertToSerializeableObject } from '@/utils/convertToObject';
 
-const Profile = async () => {
-  await connectDB()
+const ProfilePage = async () => {
+  await connectDB();
 
-  const sessionUser = await getSessionUser()
-  const { userId } = sessionUser
+  const sessionUser = await getSessionUser();
+
+  const { userId } = sessionUser;
 
   if (!userId) {
-    throw new Error('User ID is required')
+    throw new Error('User ID is required');
   }
 
-  const propertiesDocs = await Property.find({ owner: userId }).lean()
-  const properties = propertiesDocs.map(convertToSerializableObject)
+  const propertiesDocs = await Property.find({ owner: userId }).lean();
+  const properties = propertiesDocs.map(convertToSerializeableObject);
 
   return (
     <section className='bg-blue-50'>
@@ -48,13 +49,17 @@ const Profile = async () => {
 
             <div className='md:w-3/4 md:pl-4'>
               <h2 className='text-xl font-semibold mb-4'>Your Listings</h2>
-              <ProfileProperties properties={properties} />
+              {properties.length === 0 ? (
+                <p>You have no property listings</p>
+              ) : (
+                <ProfileProperties properties={properties} />
+              )}
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Profile
+export default ProfilePage;
