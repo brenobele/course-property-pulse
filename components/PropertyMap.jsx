@@ -60,7 +60,7 @@ export const PropertyMap = ({ property }) => {
 
   if (loading) return <Spinner />
 
-  if (geocodeError) return <div className='text-xl'>No localion data found</div>
+  if (geocodeError) return <div className='text-xl'>No location data found</div>
 
   return (
     !loading && (
