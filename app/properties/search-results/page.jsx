@@ -33,7 +33,6 @@ const SearchResultsPage = async ({
   const properties = propertiesQueryResults.map((property) =>
     convertToSerializeableObject(property)
   )
-  console.log(properties)
 
   return (
     <>
