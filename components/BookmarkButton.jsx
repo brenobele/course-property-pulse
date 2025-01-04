@@ -32,7 +32,7 @@ const BookmarkButton = ({ property }) => {
       return
     }
     bookmarkProperty(property._id).then((res) => {
-      if (res.error) return toast.error(res.error)
+      if (res.error) toast.error(res.error)
       setIsBookmarked(res.isBookmarked)
       toast.success(res.message)
     })
